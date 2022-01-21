@@ -8,6 +8,8 @@ authors = ["Georgi Genchev <gdgenchev97@gmail.com>", "Tsvetina Vasileva <tsvetin
 python = "3.8"
 torch = "^1.10.1"
 environs = "^9.3.5"
+numpy = "^1.21.5"
+opencv-python = "^4.5.4"
 
 [tool.poetry.dev-dependencies]
 
