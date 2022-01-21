@@ -6,7 +6,10 @@ from cv2 import cv2
 def generate_trimap(image):
     erosion = _erode(image)
     dilation = _dilate(image)
-    trimap = dilation - (dilation - erosion) * 0.5
+
+    trimap = np.full(image.shape, 128, dtype=np.uint8)
+    trimap[erosion == 255] = 255
+    trimap[dilation == 0] = 0
 
     return trimap
 
