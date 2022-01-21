@@ -15,16 +15,16 @@ def generate_trimap(image):
 
 
 def _erode(image, iterations=10):
-    kernel = np.ones((3, 3), np.uint8)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
     image = cv2.erode(image, kernel, iterations=iterations)
-    image = np.where(image > 0, 255, image)
+    image[image > 0] = 255
 
     return image
 
 
 def _dilate(image, iterations=20):
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
     image = cv2.dilate(image, kernel, iterations=iterations)
-    image = np.where(image > 0, 255, image)
+    image[image > 0] = 255
 
     return image
