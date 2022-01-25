@@ -3,7 +3,7 @@ from pathlib import Path
 
 from cv2 import cv2
 
-from image_matting.modules import trimap_generator
+from trimap import generate_trimap
 
 
 def parse_args():
@@ -21,6 +21,6 @@ if __name__ == "__main__":
     filename = Path(image_path).stem
 
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    trimap_image = trimap_generator.generate_trimap(image, kernel_size=5, iterations=15)
+    trimap_image = generate_trimap(image, kernel_size=5, iterations=15)
 
     cv2.imwrite(f'{output_directory_path}/{filename}_trimap.png', trimap_image)
