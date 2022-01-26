@@ -10,6 +10,9 @@ torch = "^1.10.1"
 environs = "^9.3.5"
 numpy = "^1.21.5"
 opencv-python = "^4.5.4"
+scikit-image = "^0.19.1"
+torchvision = "^0.11.2"
+matplotlib = "^3.5.1"
 
 [tool.poetry.dev-dependencies]
 
