@@ -19,7 +19,7 @@ def main():
 
     image_path_str = image_path.as_posix()
     image = cv2.imread(image_path_str, cv2.IMREAD_GRAYSCALE)
-    trimap_image = generate_trimap(image, kernel_size=5, iterations=15)
+    trimap_image = generate_trimap(image, kernel_size=3, iterations=20)
 
     cv2.imwrite(f'{output_directory_path}/{image_filename}_trimap.png', trimap_image)
 
