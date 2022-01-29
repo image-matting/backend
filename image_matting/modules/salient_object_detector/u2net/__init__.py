@@ -1,0 +1,1 @@
+from u2net.u2_salient_object_detector import U2NetSalientObjectDetector

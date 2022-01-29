@@ -3,10 +3,11 @@ import torch
 from skimage import transform, io
 from torch.autograd import Variable
 
-from model.u2net import U2NET_full
+from u2net.model.u2net import U2NET_full
 
 
 class U2NetSalientObjectDetector:
+
     def __init__(self, model_dir):
         self.u2net = _load_u2net(model_dir)
 

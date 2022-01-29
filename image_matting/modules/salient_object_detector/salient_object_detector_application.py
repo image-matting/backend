@@ -5,9 +5,9 @@ from pathlib import Path
 from PIL import Image
 from skimage import io
 
-from salient_object_detector import U2NetSalientObjectDetector
+from u2net import U2NetSalientObjectDetector
 
-MODEL_DIR = './U-2-Net/saved_models/u2net/u2net.pth'
+MODEL_DIR = './u2net/saved_models/u2net/u2net.pth'
 
 
 def main():
