@@ -33,5 +33,6 @@ We are using poetry as a dependency management tool.
 ### Adding/Removing Dependencies
 
 1. Adding a new dependency: ```poetry add <package name>```
-2. Removing an existing dependency ```poetry remove <package_name>```
-3. Further Information - [Poetry Basic Usage](https://python-poetry.org/docs/basic-usage/)
+    - In case of errors about missing .whl files, delete C:\Users\\\<USERNAME>\AppData\Local\pypoetry\Cache directory
+3. Removing an existing dependency ```poetry remove <package_name>```
+4. Further Information - [Poetry Basic Usage](https://python-poetry.org/docs/basic-usage/)
