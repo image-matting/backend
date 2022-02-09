@@ -13,6 +13,10 @@ opencv-python = "^4.5.4"
 scikit-image = "^0.19.1"
 torchvision = "^0.11.2"
 matplotlib = "^3.5.1"
+Flask = "^2.0.2"
+Flask-Cors = "^3.0.10"
+Flask-Uploads = "^0.2.1"
+Flask-Dropzone = "^1.6.0"
 
 [tool.poetry.dev-dependencies]
 
