@@ -4,6 +4,7 @@ from pathlib import Path
 from cv2 import cv2
 
 from trimap import generate_trimap
+from trimap_output_utils import save_trimap_output
 
 
 def main():
@@ -17,11 +18,9 @@ def main():
 
     image_filename = image_path.stem
 
-    image_path_str = image_path.as_posix()
-    image = cv2.imread(image_path_str, cv2.IMREAD_GRAYSCALE)
-    trimap_image = generate_trimap(image, kernel_size=3, iterations=20)
-
-    cv2.imwrite(f'{output_directory_path}/{image_filename}_trimap.png', trimap_image)
+    saliency_image_path = image_path.as_posix()
+    trimap_image = generate_trimap(saliency_image_path, kernel_size=3, iterations=20)
+    save_trimap_output(trimap_image, image_filename, output_directory_path)
 
 
 def parse_args():

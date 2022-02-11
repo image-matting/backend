@@ -3,7 +3,8 @@ import numpy as np
 from cv2 import cv2
 
 
-def generate_trimap(image, kernel_size, iterations):
+def generate_trimap(saliency_image_path, kernel_size=3, iterations=20):
+    image = cv2.imread(saliency_image_path)
     erosion = _erode(image, kernel_size, iterations)
     dilation = _dilate(image, kernel_size, iterations)
 
