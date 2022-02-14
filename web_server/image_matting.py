@@ -6,6 +6,8 @@ from flask import Flask, request, session
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
+from alpha_mask_output_utils import save_alpha_mask_output
+from deep_image_matting import AlphaMaskGenerator
 from saliency_output_utils import save_saliency_output
 from trimap import generate_trimap
 from trimap_output_utils import save_trimap_output
@@ -16,8 +18,6 @@ UPLOAD_DIR = './uploads'
 if not os.path.exists(UPLOAD_DIR):
     os.makedirs(UPLOAD_DIR)
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
 app = Flask(__name__)
 CORS(app)
 
@@ -26,8 +26,11 @@ app.config['SECRET_KEY'] = uuid.uuid4().hex
 INPUT_IMAGE_NAME = "input_image"
 BACKGROUND_IMAGE_NAME = "background_image"
 
-MODEL_DIR = '../image_matting/modules/salient_object_detector/u2net/saved_models/u2net/u2net.pth'
-saliency_object_detector = U2NetSalientObjectDetector(MODEL_DIR)
+SALIENCY_MODEL_DIR = '../image_matting/modules/salient_object_detector/u2net/saved_models/u2net/u2net.pth'
+ALPHA_MODEL_DIR = '../image_matting/modules/alpha_mask_generator/deep_image_matting/model/stage1_skip_sad_52.9.pth'
+
+saliency_object_detector = U2NetSalientObjectDetector(SALIENCY_MODEL_DIR)
+alpha_mask_generator = AlphaMaskGenerator(ALPHA_MODEL_DIR)
 
 
 @app.route('/upload', methods=['POST'])
@@ -48,7 +51,9 @@ def upload():
 
         trimap_image = generate_trimap(saliency_image_path)
         trimap_image_path = save_trimap_output(trimap_image, INPUT_IMAGE_NAME, unique_dir)
-        # TODO: Add alpha mask in a similar way
+
+        alpha_mask_image = alpha_mask_generator.generate_alpha_mask(saved_input_image_path, trimap_image_path)
+        alpha_image_path = save_alpha_mask_output(alpha_mask_image, INPUT_IMAGE_NAME, unique_dir)
 
     return ""
 
